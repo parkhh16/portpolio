@@ -23,10 +23,10 @@ export const projects: Project[] = [
     description: "AI 기반 자동 분석과 실시간 로그 시각화가 가능한 오픈소스 웹 분석 플랫폼",
     image: "/ApilogLogo.webp",
     tags: ["Real-time Analytics", "AI Integration", "Plugin System", "Dashboard"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/APIL0g/APILog",
+    live: "https://github.com/APIL0g/APILog",
     period: "2025.10.13 - 2025.11.20 (5주)",
-    role: "Full-stack / DevOps (폴더·인프라 설계)",
+    role: "Full-stack / DevOps (풀스택·인프라 설계)",
     problem:
       "운영자는 수많은 로그와 대시보드를 가지고 있지만, '그래서 지금 서비스가 어떤 상태인지, 뭐가 문제인지'를 이해하기 위해 매번 수동으로 쿼리를 짜고 지표를 조합해야 했습니다.",
     solution:
@@ -49,8 +49,8 @@ export const projects: Project[] = [
       "음성으로 일상을 기록하면 AI가 감정을 분석해 편지를 만들고, NFT 형태의 디지털 타임캡슐로 선물할 수 있는 서비스",
     image: "/see_you_letter.png",
     tags: ["Voice Cloning", "AI Diary", "NFT Time Capsule", "CI/CD"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/SeeY0uLetter/SeeYouLetter",
+    live: "https://github.com/SeeY0uLetter/SeeYouLetter",
     period: "2025.08.25 - 2025.09.29 (5주)",
     role: "인프라 / AI / 디자인",
     problem:
@@ -84,8 +84,6 @@ export const projects: Project[] = [
     description: "OCR 기반 자동 정산과 위치 기반 일정 관리를 제공하는 여행 지원 플랫폼",
     image: "/galmal.webp",
     tags: ["Trip Settlement", "Group Travel", "OCR", "LLM", "Scheduling"],
-    github: "#",
-    live: "#",
     period: "2024.03 – 2024.05 (약 2개월, 팀 프로젝트)",
     role: "Full-stack / Backend (정산 로직·DB 모델링·데이터 파이프라인 설계)",
     problem:

@@ -28,7 +28,7 @@ export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null)
 
   const fullTitle = "Skills & Expertise"
-  const fullSubtitle = "ÀÚÁÖ »ç¿ëÇÏ´Â ±â¼ú°ú µµ±¸µéÀ» Á¤¸®Çß½À´Ï´Ù."
+  const fullSubtitle = "ìì£¼ ì‚¬ìš©í•˜ëŠ” ê¸°ìˆ ê³¼ ë„êµ¬ë“¤ì„ ì •ë¦¬í–ˆìŠµë‹ˆë‹¤."
 
   const titleText = useScrollBoundText({ text: fullTitle, targetRef: sectionRef })
   const subtitleText = useScrollBoundText({ text: fullSubtitle, targetRef: sectionRef })
@@ -56,7 +56,11 @@ export default function Skills() {
   }, [])
 
   return (
-    <section id="skills" ref={sectionRef} className="section-fullscreen snap-section bg-secondary/30 py-24 md:py-32 flex items-center">
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="section-fullscreen snap-section bg-secondary/30 py-24 md:py-32 flex items-center"
+    >
       <div className="container mx-auto px-10">
         <div className="max-w-6xl mx-auto space-y-20">
           <div className="text-center space-y-6">
@@ -104,3 +108,4 @@ export default function Skills() {
     </section>
   )
 }
+

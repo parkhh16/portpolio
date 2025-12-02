@@ -72,6 +72,8 @@ export default function ProjectDetailPage() {
   const period = project.period ?? "기간 미정"
   const role = project.role ?? "역할 정보 미정"
   const techBadges = project.techStack ?? project.tags ?? []
+  const hasLive = Boolean(project.live) || slug === "galmal"
+  const hasGithub = Boolean(project.github) || slug === "galmal"
 
   const challenges: ChallengeItem[] = (() => {
     if (slug === "apilog") {
@@ -363,23 +365,35 @@ export default function ProjectDetailPage() {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-6 animate-on-scroll opacity-0">
-              {project.live && (
+              {hasLive && (
                 <a
-                  href={project.live}
+                  href={project.live || "#"}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-[#6366F1] text-white rounded-full font-semibold hover:bg-[#6366F1]/90 transition-colors"
+                  onClick={(e) => {
+                    if (slug === "galmal") {
+                      e.preventDefault()
+                      alert("준비 중입니다.")
+                    }
+                  }}
                 >
                   <ExternalLink className="w-5 h-5" />
                   Live Demo
                 </a>
               )}
-              {project.github && (
+              {hasGithub && (
                 <a
-                  href={project.github}
+                  href={project.github || "#"}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-card border-2 border-border rounded-full font-semibold hover:border-[#6366F1] transition-colors"
+                  onClick={(e) => {
+                    if (slug === "galmal") {
+                      e.preventDefault()
+                      alert("준비 중입니다.")
+                    }
+                  }}
                 >
                   <Code className="w-5 h-5" />
                   View Code
@@ -414,7 +428,7 @@ export default function ProjectDetailPage() {
                 {techBadges.map((tech) => (
                   <Badge
                     key={tech}
-                    className="text-sm md:text-base px-4 py-2 bg-background/80 border border-border hover:border-[#6366F1]/60 hover:bg-background transition-colors"
+                    className="text-sm md:text-base px-4 py-2 bg-background/80 text-foreground border border-border hover:border-[#6366F1]/60 hover:bg-background transition-colors"
                   >
                     {tech}
                   </Badge>
@@ -598,4 +612,3 @@ export default function ProjectDetailPage() {
     </div>
   )
 }
-
