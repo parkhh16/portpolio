@@ -37,7 +37,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative h-screen bg-background py-12 md:py-16 flex items-center overflow-hidden">
+    <section id="contact" className="relative section-fullscreen snap-section bg-background py-12 md:py-16 flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5 animate-gradient" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(var(--accent-rgb),0.1),transparent_50%)]" />
 

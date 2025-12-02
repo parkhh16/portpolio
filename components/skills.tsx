@@ -56,7 +56,7 @@ export default function Skills() {
   }, [])
 
   return (
-    <section id="skills" ref={sectionRef} className="min-h-screen bg-secondary/30 py-44 md:py-52 flex items-center">
+    <section id="skills" ref={sectionRef} className="section-fullscreen snap-section bg-secondary/30 py-24 md:py-32 flex items-center">
       <div className="container mx-auto px-10">
         <div className="max-w-6xl mx-auto space-y-20">
           <div className="text-center space-y-6">

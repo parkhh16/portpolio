@@ -15,29 +15,53 @@ export function useScrollBoundText({ text, targetRef }: UseScrollBoundTextOption
   const characters = useMemo(() => Array.from(text), [text])
 
   useEffect(() => {
-    const updateText = () => {
-      const element = targetRef.current
-      if (!element) return
+    const element = targetRef.current
+    if (!element) return
 
-      const rect = element.getBoundingClientRect()
-      const windowHeight = window.innerHeight || 1
-      const elementCenter = rect.top + rect.height / 2
-      const start = windowHeight
-      const end = windowHeight * 0.7
-      const range = Math.max(start - end, 1)
-      const rawProgress = (start - elementCenter) / range
-      const progress = clamp(rawProgress)
+    const duration = 800 // ms
+    let frameId: number | null = null
+    let startTime: number | null = null
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) {
+        startTime = timestamp
+      }
+
+      const elapsed = timestamp - startTime
+      const progress = clamp(elapsed / duration)
       const nextLength = Math.floor(characters.length * progress)
+
       setDisplayText(characters.slice(0, nextLength).join(""))
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(animate)
+      } else {
+        frameId = null
+      }
     }
 
-    updateText()
-    window.addEventListener("scroll", updateText, { passive: true })
-    window.addEventListener("resize", updateText)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startTime = null
+            if (frameId !== null) {
+              window.cancelAnimationFrame(frameId)
+            }
+            frameId = window.requestAnimationFrame(animate)
+          }
+        })
+      },
+      { threshold: 0.5 },
+    )
+
+    observer.observe(element)
 
     return () => {
-      window.removeEventListener("scroll", updateText)
-      window.removeEventListener("resize", updateText)
+      observer.disconnect()
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId)
+      }
     }
   }, [characters, targetRef])
 

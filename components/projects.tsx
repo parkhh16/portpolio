@@ -73,34 +73,26 @@ export default function Projects() {
     const card = cardRefs.current[currentIndex]
     if (!container || !card) return
 
-    // Wait for the card size transition to complete (700ms) before centering
-    const scrollTimer = setTimeout(() => {
-      const containerRect = container.getBoundingClientRect()
-      const cardRect = card.getBoundingClientRect()
+    const cardLeft = card.offsetLeft
+    const cardWidth = card.offsetWidth
+    const containerWidth = container.clientWidth
 
-      const containerCenter = containerRect.left + containerRect.width / 2
-      const cardCenter = cardRect.left + cardRect.width / 2
-      const offset = cardCenter - containerCenter
+    const targetScrollLeft = cardLeft - (containerWidth - cardWidth) / 2
 
-      container.scrollBy({
-        left: offset,
-        behavior: "smooth",
-      })
-    }, 700)
-
-    return () => clearTimeout(scrollTimer)
+    container.scrollTo({
+      left: targetScrollLeft,
+      behavior: "smooth",
+    })
   }, [currentIndex])
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="relative h-screen bg-background overflow-hidden flex items-center"
+      className="relative section-fullscreen snap-section bg-background overflow-hidden flex items-center"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 animate-gradient" />
-
-      <div className="relative w-full">
-        <div className="w-full space-y-6 md:space-y-8">
+      <div className="relative w-full mt-16 md:mt-20 lg:mt-24">
+        <div className="w-full space-y-4 md:space-y-6">
           {/* Title Section */}
           <div className="text-center space-y-2 px-6">
             <h2
@@ -120,19 +112,19 @@ export default function Projects() {
               ))}
               {showTitleCursor && <span className="animate-pulse">|</span>}
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto min-h-[2rem] leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto min-h-[2rem] leading-relaxed line-clamp-1">
               {subtitleText}
               {showSubtitleCursor && <span className="animate-pulse">|</span>}
             </p>
           </div>
 
           {/* Carousel Container */}
-          <div className="relative w-full">
+          <div className="relative w-full md:max-w-5xl md:mx-auto md:px-4">
             {/* Navigation Buttons */}
             <button
               onClick={() => navigate("prev")}
               disabled={currentIndex === 0}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 bg-card/80 backdrop-blur-xl text-foreground rounded-full shadow-2xl hover:bg-primary hover:text-primary-foreground hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-card/80 transition-all duration-300 border border-border/50"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 bg-card/80 backdrop-blur-xl text-foreground rounded-full hover:bg-primary hover:text-primary-foreground hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-card/80 transition-all duration-300 border border-border/50"
               aria-label="Previous project"
             >
               <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" />
@@ -141,7 +133,7 @@ export default function Projects() {
             <button
               onClick={() => navigate("next")}
               disabled={currentIndex === projects.length - 1}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 bg-card/80 backdrop-blur-xl text-foreground rounded-full shadow-2xl hover:bg-primary hover:text-primary-foreground hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-card/80 transition-all duration-300 border border-border/50"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 bg-card/80 backdrop-blur-xl text-foreground rounded-full hover:bg-primary hover:text-primary-foreground hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-card/80 transition-all duration-300 border border-border/50"
               aria-label="Next project"
             >
               <ChevronRight className="w-6 h-6 md:w-7 md:h-7" />
@@ -150,14 +142,14 @@ export default function Projects() {
             {/* Scrollable Cards Container */}
             <div
               ref={containerRef}
-              className="overflow-x-auto overflow-y-visible scroll-smooth h-[55vh] md:h-[60vh] flex items-center"
+              className="overflow-x-auto overflow-y-visible scroll-smooth flex items-center"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
               <div
-                className="flex items-center gap-6 md:gap-8 py-6"
+                className="flex items-center gap-6 md:gap-8 py-4 md:py-6"
                 style={{
                   paddingLeft: "50vw",
                   paddingRight: "50vw",
@@ -171,17 +163,17 @@ export default function Projects() {
                       ref={(el) => {
                         cardRefs.current[index] = el
                       }}
-                      className="flex-shrink-0 transition-all duration-700 ease-out cursor-pointer"
+                      className="flex-shrink-0 transition-all duration-300 ease-out cursor-pointer"
                       style={{
-                        width: isActive ? "min(75vw, 650px)" : "min(55vw, 450px)",
+                        width: "min(50vw, 480px)",
                       }}
                       onClick={() => !isActive && goToSlide(index)}
                     >
-                      <div className="py-4">
+                      <div className="py-3">
                         <Card
-                          className={`transition-all duration-700 border bg-card h-full flex flex-col overflow-hidden ${
+                          className={`transition-all duration-300 border bg-card h-full flex flex-col overflow-hidden ${
                             isActive
-                              ? "border-primary/50 shadow-2xl shadow-primary/20 opacity-100 scale-100"
+                              ? "border-primary/50 opacity-100 scale-100"
                               : "opacity-50 hover:opacity-75 scale-95 hover:scale-[0.97] border-border/50"
                           }`}
                         >
@@ -191,7 +183,7 @@ export default function Projects() {
                               <img
                                 src={project.image || "/placeholder.svg"}
                                 alt={project.title}
-                                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
                               />
 
                               <div
@@ -201,32 +193,32 @@ export default function Projects() {
                               />
 
                               {/* Action Buttons */}
-                              {isActive && (
-                                <div className="absolute bottom-3 right-3 flex gap-2 animate-in fade-in slide-in-from-bottom-6 duration-700">
-                                  <a
-                                    href={project.link}
-                                    className="p-2.5 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all hover:scale-110 hover:-translate-y-1 shadow-xl backdrop-blur-sm"
-                                    onClick={(e) => e.stopPropagation()}
-                                    aria-label="View project"
-                                  >
-                                    <ExternalLink className="w-4 h-4" />
-                                  </a>
-                                  <a
-                                    href={project.github}
-                                    className="p-2.5 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all hover:scale-110 hover:-translate-y-1 shadow-xl backdrop-blur-sm"
-                                    onClick={(e) => e.stopPropagation()}
-                                    aria-label="View source code"
-                                  >
-                                    <Github className="w-4 h-4" />
-                                  </a>
-                                </div>
-                              )}
+                                {isActive && (
+                                  <div className="absolute bottom-3 right-3 flex gap-2 animate-in fade-in slide-in-from-bottom-6 duration-300">
+                                    <a
+                                      href={project.link}
+                                      className="p-2.5 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all hover:scale-110 hover:-translate-y-1 backdrop-blur-sm"
+                                      onClick={(e) => e.stopPropagation()}
+                                      aria-label="View project"
+                                    >
+                                      <ExternalLink className="w-4 h-4" />
+                                    </a>
+                                    <a
+                                      href={project.github}
+                                      className="p-2.5 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all hover:scale-110 hover:-translate-y-1 backdrop-blur-sm"
+                                      onClick={(e) => e.stopPropagation()}
+                                      aria-label="View source code"
+                                    >
+                                      <Github className="w-4 h-4" />
+                                    </a>
+                                  </div>
+                                )}
                             </div>
                           </div>
 
                           {/* Card Content - Only show when active */}
                           {isActive && (
-                            <div className="p-3 md:p-4 mt-auto space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                            <div className="p-3 md:p-4 mt-auto space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-300">
                               <h3 className="text-lg md:text-xl font-bold text-balance leading-tight">
                                 {project.title}
                               </h3>
@@ -265,7 +257,7 @@ export default function Projects() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all duration-500 rounded-full ${
                   index === currentIndex
-                    ? "w-10 md:w-12 h-2.5 md:h-3 bg-primary shadow-lg shadow-primary/50"
+                    ? "w-10 md:w-12 h-2.5 md:h-3 bg-primary"
                     : "w-2.5 md:w-3 h-2.5 md:h-3 bg-muted-foreground/30 hover:bg-muted-foreground/50 hover:scale-125"
                 }`}
                 aria-label={`Go to project ${index + 1}`}

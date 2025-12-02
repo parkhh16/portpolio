@@ -127,6 +127,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
   }
 }
 
@@ -137,5 +138,15 @@
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Fullscreen section height minus fixed nav (4rem) */
+  .section-fullscreen {
+    min-height: calc(100vh - 4rem);
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }

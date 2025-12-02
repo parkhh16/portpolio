@@ -24,7 +24,7 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about" ref={sectionRef} className="min-h-screen bg-secondary/30 py-36 md:py-44 flex items-center">
+    <section id="about" ref={sectionRef} className="section-fullscreen snap-section bg-secondary/30 py-24 md:py-32 flex items-center">
       <div className="container mx-auto px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
