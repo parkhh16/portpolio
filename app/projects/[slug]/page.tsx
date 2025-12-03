@@ -73,6 +73,7 @@ export default function ProjectDetailPage() {
   const role = project.role ?? "역할 정보 미정"
   const techBadges = project.techStack ?? project.tags ?? []
   const hasLive = Boolean(project.live) || slug === "galmal"
+  const isLiveDemoReady = Boolean(project.live && project.live !== project.github)
   const hasGithub = Boolean(project.github) || slug === "galmal"
 
   const challenges: ChallengeItem[] = (() => {
@@ -367,14 +368,18 @@ export default function ProjectDetailPage() {
             <div className="flex flex-wrap gap-4 mb-6 animate-on-scroll opacity-0">
               {hasLive && (
                 <a
-                  href={project.live || "#"}
+                  href={isLiveDemoReady && project.live ? project.live : "#"}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#6366F1] text-white rounded-full font-semibold hover:bg-[#6366F1]/90 transition-colors"
+                  className={`inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-colors ${
+                    isLiveDemoReady
+                      ? "bg-[#6366F1] text-white hover:bg-[#6366F1]/90"
+                      : "bg-muted text-muted-foreground cursor-not-allowed"
+                  }`}
                   onClick={(e) => {
-                    if (slug === "galmal") {
+                    if (!isLiveDemoReady) {
                       e.preventDefault()
-                      alert("준비 중입니다.")
+                      alert("데모 준비중입니다.")
                     }
                   }}
                 >
@@ -382,6 +387,7 @@ export default function ProjectDetailPage() {
                   Live Demo
                 </a>
               )}
+
               {hasGithub && (
                 <a
                   href={project.github || "#"}
@@ -432,6 +438,111 @@ export default function ProjectDetailPage() {
                   >
                     {tech}
                   </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* See You Letter 전용 GIF 프리뷰 */}
+      {slug === "see-you-letter" && (
+        <section className="py-12 px-8">
+          <div className="max-w-6xl mx-auto animate-on-scroll opacity-0">
+            <div className="flex flex-col gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold mb-2">Experience Flow</h3>
+                <p className="text-muted-foreground">
+                  편지 열기, 감정 캘린더, 회고 화면까지 이어지는 실제 인터랙션을 GIF로 담았습니다.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {[
+                  { title: "Open Letter", src: "/OpenLetter.gif" },
+                  { title: "Calendar", src: "/Calendar.gif" },
+                  { title: "Retrospective", src: "/Retrospective.gif" },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-3xl border border-border bg-card/60 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <div className="aspect-[4/5] w-full bg-muted">
+                      <img src={item.src} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4 text-center bg-background/80 border-t border-border/60">
+                      <span className="text-lg font-semibold">{item.title}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* See You Letter 전용 GIF 프리뷰 */}
+      {slug === "see-you-letter" && (
+        <section className="py-12 px-8">
+          <div className="max-w-6xl mx-auto animate-on-scroll opacity-0">
+            <div className="flex flex-col gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold mb-2">Experience Flow</h3>
+                <p className="text-muted-foreground">
+                  편지 열기, 감정 캘린더, 회고 화면까지 이어지는 실제 인터랙션을 GIF로 담았습니다.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {[
+                  { title: "Open Letter", src: "/OpenLetter.gif" },
+                  { title: "Calendar", src: "/Calendar.gif" },
+                  { title: "Retrospective", src: "/Retrospective.gif" },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-3xl border border-border bg-card/60 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <div className="aspect-[4/5] w-full bg-muted">
+                      <img src={item.src} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4 text-center bg-background/80 border-t border-border/60">
+                      <span className="text-lg font-semibold">{item.title}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 갈래말래 전용 이미지 프리뷰 */}
+      {slug === "galmal" && (
+        <section className="py-12 px-8">
+          <div className="max-w-6xl mx-auto animate-on-scroll opacity-0">
+            <div className="flex flex-col gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold mb-2">Group Experience</h3>
+                <p className="text-muted-foreground">
+                  그룹 생성부터 일정 관리, 그룹 정산 화면까지 핵심 흐름을 캡처했습니다.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {[
+                  { title: "Group First Page", src: "/group_first_page.png" },
+                  { title: "Group Photo", src: "/group_photo.png" },
+                  { title: "Group Pay", src: "/GroupPay.png" },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-3xl border border-border bg-card/60 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <div className="aspect-[4/5] w-full bg-muted">
+                      <img src={item.src} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4 text-center">
+                      <span className="text-lg font-semibold">{item.title}</span>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

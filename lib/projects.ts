@@ -24,7 +24,7 @@ export const projects: Project[] = [
     image: "/ApilogLogo.webp",
     tags: ["Real-time Analytics", "AI Integration", "Plugin System", "Dashboard"],
     github: "https://github.com/APIL0g/APILog",
-    live: "https://github.com/APIL0g/APILog",
+    live: "https://apilog.vercel.app",
     period: "2025.10.13 - 2025.11.20 (5주)",
     role: "Full-stack / DevOps (풀스택·인프라 설계)",
     problem:
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     image: "/see_you_letter.png",
     tags: ["Voice Cloning", "AI Diary", "NFT Time Capsule", "CI/CD"],
     github: "https://github.com/SeeY0uLetter/SeeYouLetter",
-    live: "https://github.com/SeeY0uLetter/SeeYouLetter",
+    live: "https://see-you-letter.vercel.app",
     period: "2025.08.25 - 2025.09.29 (5주)",
     role: "인프라 / AI / 디자인",
     problem:

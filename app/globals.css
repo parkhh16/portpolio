@@ -126,7 +126,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scroll-snap-type: y mandatory;
   }
 }
@@ -147,6 +147,6 @@
 
   .snap-section {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
   }
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Card } from "@/components/ui/card"
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react"
 import { useScrollBoundText } from "@/hooks/use-scroll-bound-text"
@@ -11,6 +12,7 @@ export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const sectionRef = useRef<HTMLElement>(null)
+  const router = useRouter()
 
   const fullTitle = "Featured Projects"
   const fullSubtitle = "문제 해결 중심으로 접근하며 설계·구현한 작업들을 소개합니다."
@@ -133,7 +135,13 @@ export default function Projects() {
                       style={{
                         width: "min(50vw, 480px)",
                       }}
-                      onClick={() => !isActive && goToSlide(index)}
+                      onClick={() => {
+                        if (isActive) {
+                          router.push(`/projects/${project.slug}`)
+                        } else {
+                          goToSlide(index)
+                        }
+                      }}
                     >
                       <div className="py-3">
                         <Card
@@ -215,21 +223,6 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 md:gap-2.5 px-6">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`transition-all duration-500 rounded-full ${
-                  index === currentIndex
-                    ? "w-10 md:w-12 h-2.5 md:h-3 bg-primary"
-                    : "w-2.5 md:w-3 h-2.5 md:h-3 bg-muted-foreground/30 hover:bg-muted-foreground/50 hover:scale-125"
-                }`}
-                aria-label={`Go to project ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
