@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { ArrowDown } from "lucide-react"
+import { CursorPressureText } from "@/components/cursor-pressure-text"
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -46,9 +47,11 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-balance mb-6 leading-[1.05]"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Creative
+              <CursorPressureText text="Creative" />
               <br />
-              <span className="text-accent">Developer</span>
+              <span className="text-accent">
+                <CursorPressureText text="Developer" />
+              </span>
             </h1>
           </div>
 
