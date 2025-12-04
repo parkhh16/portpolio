@@ -90,9 +90,9 @@ export default function Hero() {
               ].map((item) => (
                 <span
                   key={item}
-                  className="px-4 py-2 rounded-full border border-border/60 bg-background/80 backdrop-blur text-foreground/90 shadow-sm"
-                >
-                  {item}
+                  className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/60 bg-background/80 backdrop-blur text-muted-foreground/90 shadow-sm transition-all duration-300 hover:border-accent/60 hover:bg-accent/5 hover:text-foreground hover:-translate-y-1"
+                >  
+                  <span>{item}</span>
                 </span>
               ))}
             </div>
@@ -107,3 +107,4 @@ export default function Hero() {
     </section>
   )
 }
+
