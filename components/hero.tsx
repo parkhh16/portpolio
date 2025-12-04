@@ -57,11 +57,11 @@ export default function Hero() {
 
           <div className="parallax-layer" data-speed="0.5">
             <p className="text-sm sm:text-base md:text-lg text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed">
-              데이터를 어떻게 흘려보낼지부터 고민하고,
+              데이터와 사용자의 행동을
               <br />
-              문제를 구조적으로 해결하는 데 집중하는 개발자입니다.
+              실시간 로그, 대시보드, AI 리포트처럼
               <br />
-              실시간 분석, AI 기능, 대시보드 같은 제품을 만드는 걸 좋아합니다.
+              “보고 바로 이해되는 도구”로 만드는 개발자입니다.
             </p>
           </div>
 
