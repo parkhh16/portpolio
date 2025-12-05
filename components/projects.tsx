@@ -190,9 +190,9 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative section-fullscreen snap-section bg-background overflow-hidden flex items-center py-16 sm:py-20 md:py-24 lg:py-28"
+      className="relative section-fullscreen snap-section bg-background overflow-hidden py-10 md:py-12"
     >
-      <div className="relative w-full mt-16 md:mt-20 lg:mt-24">
+      <div className="relative w-full">
         <div className="w-full space-y-4 md:space-y-6">
           {/* Title Section */}
           <div className="text-center space-y-2 px-4 sm:px-6 md:px-8 lg:px-10">
@@ -241,21 +241,21 @@ export default function Projects() {
             </button>
 
             {/* Scrollable Cards Container */}
-            <div
-              ref={containerRef}
-              className="overflow-x-auto overflow-y-visible flex items-center cursor-grab select-none"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
               <div
-                className="flex items-center gap-6 md:gap-8 py-4 md:py-6"
+                ref={containerRef}
+                className="overflow-x-auto overflow-y-visible flex items-center cursor-grab select-none"
                 style={{
-                  paddingLeft: "50vw",
-                  paddingRight: "50vw",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
                 }}
               >
+                <div
+                  className="flex items-center gap-6 md:gap-8 py-2 md:py-3"
+                  style={{
+                    paddingLeft: "50vw",
+                    paddingRight: "50vw",
+                  }}
+                >
                 {projects.map((project, index) => {
                   const isActive = index === currentIndex
                   return (
@@ -279,8 +279,8 @@ export default function Projects() {
                           goToSlide(index)
                         }
                       }}
-                    >
-                      <div className="py-3">
+                      >
+                      <div className="py-1.5 md:py-2">
                         <Card
                           className={`transition-all duration-300 border bg-card h-full flex flex-col overflow-hidden ${
                             isActive
@@ -288,9 +288,9 @@ export default function Projects() {
                               : "opacity-50 hover:opacity-75 scale-95 hover:scale-[0.97] border-border/50"
                           }`}
                         >
-                          {/* Card Image */}
-                          <div className="relative p-2 md:p-3">
-                            <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-muted group">
+                            {/* Card Image */}
+                            <div className="relative p-1.5 md:p-2">
+                              <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-muted group">
                               <img
                                 src={project.image || "/placeholder.svg"}
                                 alt={project.title}
@@ -328,9 +328,9 @@ export default function Projects() {
                           </div>
 
                           {/* Card Content - Only show when active */}
-                          {isActive && (
-                            <div className="p-3 md:p-4 mt-auto space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                              <h3 className="text-lg md:text-xl font-bold text-balance leading-tight">
+                            {isActive && (
+                              <div className="p-2.5 md:p-3 mt-auto space-y-1.5 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <h3 className="text-base md:text-lg font-bold text-balance leading-tight">
                                 {project.title}
                               </h3>
                               <p className="text-muted-foreground leading-relaxed text-xs md:text-sm line-clamp-2">

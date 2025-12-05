@@ -134,6 +134,8 @@
   html {
     scroll-behavior: auto;
     scroll-snap-type: y mandatory;
+    /* Offset snap/anchor so section titles aren't hidden behind fixed nav */
+    scroll-padding-top: 5rem;
   }
 }
 

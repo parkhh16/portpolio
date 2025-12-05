@@ -37,18 +37,13 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative section-fullscreen snap-section bg-background py-16 sm:py-20 md:py-24 lg:py-28 flex items-center overflow-hidden">
+    <section id="contact" className="relative section-fullscreen snap-section bg-background py-10 md:py-12 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5 animate-gradient" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(var(--accent-rgb),0.1),transparent_50%)]" />
 
       <div className="relative w-full px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="w-full max-w-[1600px] mx-auto space-y-8">
           <div className="text-center space-y-2">
-            <div className="inline-block">
-              <div className="px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-xs font-medium mb-2">
-                Get In Touch
-              </div>
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
               Let's <span className="text-accent">Connect</span>
             </h2>

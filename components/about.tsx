@@ -25,11 +25,7 @@ export default function About() {
   }, [])
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="section-fullscreen snap-section bg-secondary/30 py-16 sm:py-20 md:py-24 lg:py-28 flex items-center"
-    >
+    <section id="about" ref={sectionRef} className="section-fullscreen snap-section bg-secondary/30 py-10 md:py-12">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="max-w-4xl mx-auto">
           <div

@@ -59,11 +59,11 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="section-fullscreen snap-section bg-secondary/30 py-16 sm:py-20 md:py-24 lg:py-28 flex items-center"
+      className="section-fullscreen snap-section bg-secondary/30 py-10 md:py-12"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-        <div className="max-w-6xl mx-auto space-y-20">
-          <div className="text-center space-y-6">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="text-center space-y-4">
             <h2
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold min-h-[4.5rem]"
               style={{ fontFamily: "var(--font-display)" }}
