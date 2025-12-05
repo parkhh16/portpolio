@@ -1,41 +1,27 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { ArrowDown } from "lucide-react"
 import { CursorPressureText } from "@/components/cursor-pressure-text"
+import Particles from "@/components/particles"
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
-
   return (
     <section id="home" className="relative min-h-screen snap-section flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5">
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-          style={{
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-            transition: "transform 0.3s ease-out",
-          }}
-        />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-          style={{
-            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
-            transition: "transform 0.3s ease-out",
-          }}
+        <Particles
+          particleColors={["#a855f7"]}
+          particleCount={200}
+          particleSpread={20}
+          speed={0.1}
+          particleBaseSize={100}
+          sizeRandomness={1}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+          cameraDistance={20}
+          pixelRatio={1}
+          className="w-full h-full"
         />
       </div>
 
