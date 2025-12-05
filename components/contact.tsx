@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Mail, Github, Linkedin, Twitter, Send, MapPin, Clock } from "lucide-react"
+import { toast } from "@/hooks/use-toast"
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -17,23 +18,57 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
-    setSubmitted(true)
+      const data = await response.json().catch(() => ({}))
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({ name: "", email: "", message: "" })
-      setSubmitted(false)
-    }, 3000)
+      if (!response.ok || !data.ok) {
+        const message =
+          data?.error ||
+          (response.status === 429
+            ? "Too many messages. Please try again later."
+            : "Failed to send message. Please try again.")
+        setError(message)
+        toast({
+          variant: "destructive",
+          title: "메시지 전송에 실패했습니다.",
+          description: message,
+        })
+      } else {
+        setSubmitted(true)
+        setFormData({ name: "", email: "", message: "" })
+        toast({
+          title: "메시지가 전송되었습니다.",
+          description: "가능한 빨리 확인 후 답장드릴게요.",
+        })
+        setTimeout(() => {
+          setSubmitted(false)
+        }, 3000)
+      }
+    } catch (err) {
+      setError("Network error. Please try again.")
+      toast({
+        variant: "destructive",
+        title: "네트워크 오류가 발생했습니다.",
+        description: "잠시 후 다시 시도해주세요.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -118,6 +153,12 @@ export default function Contact() {
                     </span>
                   )}
                 </Button>
+
+                {error && (
+                  <p className="text-xs text-destructive text-center pt-1">
+                    {error}
+                  </p>
+                )}
               </form>
             </Card>
 
